@@ -1,0 +1,305 @@
+/* ===== Tokens ===== */
+:root {
+  --bg: #eef2ee;
+  --superficie: #ffffff;
+  --tinta: #1c2620;
+  --tinta-suave: #5b6b60;
+  --linha: #d7ded8;
+
+  --verde: #2f6f4e;
+  --verde-escuro: #1f4d35;
+  --verde-claro: #e3efe7;
+
+  --ambar: #c9822c;
+  --ambar-claro: #f7e9d6;
+
+  --vermelho: #b3503f;
+  --vermelho-claro: #f5e2de;
+
+  --fonte-display: "Space Grotesk", sans-serif;
+  --fonte-texto: "Inter", sans-serif;
+
+  --raio: 10px;
+  --sombra: 0 1px 2px rgba(28, 38, 32, 0.06);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--tinta);
+  font-family: var(--fonte-texto);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== Topo ===== */
+.topo {
+  padding: 2.5rem 1.5rem 1.5rem;
+  background: linear-gradient(135deg, var(--verde-escuro), var(--verde));
+  color: #f3f7f4;
+}
+
+.topo-titulo {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.topo h1 {
+  font-family: var(--fonte-display);
+  font-weight: 700;
+  font-size: 2rem;
+  margin: 0 0 0.35rem;
+  letter-spacing: -0.01em;
+}
+
+.topo-subtitulo {
+  margin: 0;
+  color: rgba(243, 247, 244, 0.8);
+  font-size: 0.95rem;
+}
+
+/* ===== Conteúdo ===== */
+.conteudo {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+/* ===== Formulário ===== */
+.painel-form {
+  margin-bottom: 1.75rem;
+}
+
+.form-tarefa {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.85rem;
+  background: var(--superficie);
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+  padding: 1.1rem;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex: 1 1 200px;
+}
+
+.campo-prazo {
+  flex: 0 1 160px;
+}
+
+.campo label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--tinta-suave);
+}
+
+.campo input {
+  font-family: var(--fonte-texto);
+  font-size: 0.95rem;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid var(--linha);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--tinta);
+}
+
+.campo input:focus {
+  outline: 2px solid var(--verde);
+  outline-offset: 1px;
+}
+
+.campo-acoes {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.botao {
+  font-family: var(--fonte-texto);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.6rem 1.1rem;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.botao-primario {
+  background: var(--verde);
+  color: #fff;
+}
+
+.botao-primario:hover {
+  background: var(--verde-escuro);
+}
+
+.botao-secundario {
+  background: transparent;
+  color: var(--tinta-suave);
+  border-color: var(--linha);
+}
+
+.botao-secundario:hover {
+  background: var(--bg);
+}
+
+/* ===== Quadro ===== */
+.quadro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.coluna-cabecalho {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 0 0.2rem 0.6rem;
+  border-bottom: 2px solid var(--linha);
+  margin-bottom: 0.85rem;
+}
+
+.coluna-cabecalho h2 {
+  font-family: var(--fonte-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.contador {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--tinta-suave);
+  background: var(--linha);
+  border-radius: 999px;
+  padding: 0.1rem 0.55rem;
+}
+
+.lista-tarefas {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.estado-vazio {
+  display: none;
+  font-size: 0.85rem;
+  color: var(--tinta-suave);
+  padding: 0.75rem 0.2rem;
+}
+
+/* mostrado via JS adicionando a classe abaixo quando a lista está vazia */
+.estado-vazio.visivel {
+  display: block;
+}
+
+/* ===== Card de tarefa ===== */
+.tarefa-card {
+  background: var(--superficie);
+  border: 1px solid var(--linha);
+  border-left: 3px solid var(--verde);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+  padding: 0.75rem 0.9rem;
+}
+
+.coluna[data-coluna="concluidas"] .tarefa-card {
+  border-left-color: var(--tinta-suave);
+  opacity: 0.75;
+}
+
+.tarefa-linha-principal {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.tarefa-checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--verde);
+  flex-shrink: 0;
+}
+
+.tarefa-nome {
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.coluna[data-coluna="concluidas"] .tarefa-nome {
+  text-decoration: line-through;
+  color: var(--tinta-suave);
+}
+
+.tarefa-linha-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.55rem;
+  padding-left: 1.65rem;
+}
+
+.tarefa-prazo {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--verde-escuro);
+  background: var(--verde-claro);
+  border-radius: 999px;
+  padding: 0.15rem 0.55rem;
+}
+
+/* classes opcionais pro JS aplicar conforme a urgência do prazo, se quiser usar depois */
+.tarefa-prazo.prazo-atencao {
+  color: var(--ambar);
+  background: var(--ambar-claro);
+}
+
+.tarefa-prazo.prazo-atrasado {
+  color: var(--vermelho);
+  background: var(--vermelho-claro);
+}
+
+.tarefa-acoes {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.botao-icone {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--fonte-texto);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--tinta-suave);
+  cursor: pointer;
+}
+
+.botao-icone:hover {
+  color: var(--tinta);
+}
+
+.btn-apagar:hover {
+  color: var(--vermelho);
+}
+
+/* ===== Responsivo ===== */
+@media (max-width: 620px) {
+  .quadro {
+    grid-template-columns: 1fr;
+  }
+
+  .campo-prazo {
+    flex: 1 1 200px;
+  }
+}

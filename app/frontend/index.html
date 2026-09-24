@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Minhas tarefas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="topo">
+    <div class="topo-titulo">
+      <h1>Minhas tarefas</h1>
+      <p class="topo-subtitulo">Organize o que precisa fazer, um prazo por vez.</p>
+    </div>
+  </header>
+
+  <main class="conteudo">
+
+    <!-- Formulário de criar/editar tarefa. Reaproveitado nas duas ações. -->
+    <section class="painel-form">
+      <form id="form-tarefa" class="form-tarefa" novalidate>
+        <!-- Guarda o id da tarefa quando o form está em modo "editar". Vazio = modo "criar". -->
+        <input type="hidden" id="input-id-editando" value="" />
+
+        <div class="campo">
+          <label for="input-nome">Tarefa</label>
+          <input type="text" id="input-nome" name="nome" placeholder="Ex: Estudar SQLite" required />
+        </div>
+
+        <div class="campo campo-prazo">
+          <label for="input-prazo">Prazo</label>
+          <input type="date" id="input-prazo" name="prazo" required />
+        </div>
+
+        <div class="campo-acoes">
+          <button type="submit" id="botao-salvar" class="botao botao-primario">Adicionar tarefa</button>
+          <button type="button" id="botao-cancelar-edicao" class="botao botao-secundario" hidden>Cancelar</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Quadro com as duas colunas -->
+    <section class="quadro">
+
+      <div class="coluna" data-coluna="pendentes">
+        <div class="coluna-cabecalho">
+          <h2>Pendentes</h2>
+          <span class="contador" id="contador-pendentes">0</span>
+        </div>
+        <ul class="lista-tarefas" id="lista-pendentes">
+          <!-- Cards de tarefa pendente entram aqui via JS -->
+        </ul>
+        <p class="estado-vazio" id="vazio-pendentes">Nenhuma tarefa pendente ainda.</p>
+      </div>
+
+      <div class="coluna" data-coluna="concluidas">
+        <div class="coluna-cabecalho">
+          <h2>Concluídas</h2>
+          <span class="contador" id="contador-concluidas">0</span>
+        </div>
+        <ul class="lista-tarefas" id="lista-concluidas">
+          <!-- Cards de tarefa concluída entram aqui via JS -->
+        </ul>
+        <p class="estado-vazio" id="vazio-concluidas">Nada concluído ainda.</p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Template de um card de tarefa. Clona isso no JS pra cada tarefa vinda da API. -->
+  <template id="template-tarefa">
+    <li class="tarefa-card" data-id="">
+      <div class="tarefa-linha-principal">
+        <input type="checkbox" class="tarefa-checkbox" title="Marcar como concluída" />
+        <span class="tarefa-nome"></span>
+      </div>
+      <div class="tarefa-linha-info">
+        <span class="tarefa-prazo"></span>
+        <div class="tarefa-acoes">
+          <button type="button" class="botao-icone btn-editar" title="Editar tarefa">Editar</button>
+          <button type="button" class="botao-icone btn-apagar" title="Apagar tarefa">Apagar</button>
+        </div>
+      </div>
+    </li>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
