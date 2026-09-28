@@ -1,5 +1,7 @@
+const url = "http://127.0.0.1:8000/tarefas"
+
 async function carregarTarefas() {
-    const resposta = await fetch("http://127.0.0.1:8000/tarefas");
+    const resposta = await fetch(url);
     const tarefas = await resposta.json();
     return tarefas;
 }
@@ -52,14 +54,25 @@ document.querySelector("#contador-concluidas").textContent = contador_conc;
 
 
 
-document.getElementById("form-tarefa").addEventListener("submit", function(event) {
+document.getElementById("form-tarefa").addEventListener("submit", async function(event) {
   event.preventDefault();
   const inp_nome = document.getElementById("input-nome").value;
   const inp_prazo = document.getElementById("input-prazo").value;
-  console.log(inp_nome);
-  console.log(inp_prazo)
 
   const novaTarefa = {"nome": inp_nome, "prazo": inp_prazo};
+  const dadosJson = JSON.stringify(novaTarefa);
 
+  const resposta =  await fetch(url, {
+    method: "POST",
+    headers:{
+        "Content-Type": "application/json"
+    },
+    body: dadosJson
+  });
+  const tarefaCriada = await resposta.json();
 
-});
+  const criar_card = criarCardTarefa(tarefaCriada);
+  document.querySelector("#lista-pendentes").appendChild(criar_card)
+
+  Number(document.querySelector("#contador-pendentes").textContent) + 1
+})
